@@ -1,0 +1,22 @@
+body, .markdown-body, .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6, .markdown-body dt {
+    font-family: "hero-new", sans-serif;
+}
+
+.header {
+    color: #fff;
+    background: none;
+}
+
+.toctree .caption {
+    color: rgb(40, 185, 5)
+}
+
+.sidebar {
+    background-color: rgb(20, 11, 47);
+    background-image: linear-gradient(120deg, rgb(20, 11, 47), #8666c9);
+}
+
+a, .markdown-body a {
+    color:  #8666c9;
+}
+

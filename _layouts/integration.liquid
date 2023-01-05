@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<article class="integration">
+  <h2>{{ page.name }} - {{page.integration_point}}</h2>
+
+  <h4>Description</h4>
+  <div>
+    {{page.description | markdownify }}
+  </div>
+
+  <h4><a href="{{page.repo_url}}">Source Code</a></h4>
+  
+  <h4><a href="{{page.binary_link}}">Binary / Install Files</a></h4>
+  <hr/>
+
+  <div>
+    {{ content | markdownify }}
+  </div>
+
+</article>

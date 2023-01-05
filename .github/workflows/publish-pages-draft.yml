@@ -1,0 +1,40 @@
+# This workflow publishes a GitHub Pages draft
+# A copy of a GitHub Pages repository branch will be copied to a separate draft-focused repository for publishing under that repository's access control settings
+
+name: Publish draft of GitHub Pages from branch
+
+env:
+  MAIN_REPO: ${{ github.repository }} # original repo name
+  DRAFT_REPO: 'draft-sdk-docs' # target github pages repo for draft
+
+on: 
+# runs on manual dispatch only
+  workflow_dispatch: 
+    inputs: 
+      draft_branch: 
+        description: 'The draft branch name of the main GitHub Pages repository'
+        required: true
+        default: 'draft'
+        
+jobs: 
+  publish_draft: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout draft branch
+        uses: actions/checkout@v2
+        with: 
+          # use the draft repo input as the checkout target
+          ref: ${{ github.event.inputs.draft_branch }}
+          
+      - name: Mirror repo to draft repo
+        shell: bash
+        env:
+          SSH_AUTH_SOCKET: /tmp/ssh.sock
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-agent -a $SSH_AUTH_SOCKET > /dev/null
+          ssh-add - <<< "${{ secrets.SSH_KEY }}"
+          git remote add original https://github.com/$GITHUB_REPOSITORY
+          git fetch --unshallow original ${{ github.event.inputs.draft_branch }}
+          git push ssh://git@github.com/${{ github.repository_owner }}/${{ env.DRAFT_REPO }} ${{ github.event.inputs.draft_branch }}
+          

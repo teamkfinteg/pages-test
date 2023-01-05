@@ -1,0 +1,50 @@
+title: Keyfactor Integrations SDK
+description: Keyfactor Integrations SDK and Knowledge Base
+
+# baseurl: "" # the subpath of your site, e.g. /blog
+# url: "https://keyfactor.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+
+
+remote_theme: rundocs/jekyll-rtd-theme
+
+# debug:
+#   compress: true
+#   dist: false
+#   shortcodes: true
+
+# baseurl: /sdk-docs
+
+readme_index:
+  with_frontmatter: true
+
+defaults:
+  - scope: 
+      path: ""
+      type: "integrations"
+    values:
+      layout: "integration"
+      defaults:
+  - scope:
+      path: "assets/images"
+    values:
+      image: true
+
+plugins:
+  - jemoji
+  - jekyll-avatar
+  - jekyll-mentions
+  - jekyll-github-metadata
+
+exclude:
+  - Makefile
+  - CNAME
+  - LICENSE
+  - update.sh
+  - Gemfile
+  - Gemfile.lock
+  - requirements.txt
+  - node_modules
+  - package.json
+  - package-lock.json
+  - webpack.config.js
+  - jekyll-rtd-theme.gemspec
